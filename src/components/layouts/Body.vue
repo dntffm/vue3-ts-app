@@ -93,7 +93,7 @@ import { RouterLink, RouterView } from "vue-router";
                 >
                   <div class="avatar avatar-online">
                     <img
-                      src="../assets/img/avatars/1.png"
+                      src="https://dummyimage.com/600x400/000/fff"
                       alt
                       class="w-px-40 h-auto rounded-circle"
                     />
@@ -106,7 +106,7 @@ import { RouterLink, RouterView } from "vue-router";
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
                             <img
-                              src="../assets/img/avatars/1.png"
+                              src="https://dummyimage.com/600x400/000/fff"
                               alt
                               class="w-px-40 h-auto rounded-circle"
                             />
