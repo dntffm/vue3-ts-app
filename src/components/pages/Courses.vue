@@ -56,7 +56,7 @@
                                                             <p class="card-text">Category</p>
                                                             <div class="d-flex justify-content-between">
                                                                 <h5 class="card-title fw-bold">
-                                                                    How to make someone want to fuck you
+                                                                    How to make someone want to love you
                                                                 </h5>
                                                                 <h5 class="fw-bold">Rp. 1000</h5>
                                                             </div>

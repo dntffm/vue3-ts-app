@@ -8,6 +8,7 @@ import { RouterLink, RouterView } from "vue-router";
       <aside
         id="layout-menu"
         class="layout-menu menu-vertical menu bg-menu-theme"
+        v-if="$route.name != 'coursesclass'"
       >
         <div class="app-brand demo">
           <a href="index.html" class="app-brand-link">

@@ -6,7 +6,6 @@
             <h4 class="fw-bold py-3 mb-4">
                 <span class="text-muted fw-light">/</span> My Class
             </h4>
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -35,9 +34,7 @@
                                                             25%
                                                         </div>
                                                     </div>
-                                                    <router-link to="/courses/class/1">
-                                                        <button role="button" class="btn btn-sm btn-primary rounded-pill mt-4">Continue Learning</button>
-                                                    </router-link>
+                                                    <a href="javascript:void(0)" class="btn btn-sm btn-primary rounded-pill mt-4">Continue Learning</a>
                                                 </div>
                                             </div>
                                         </div>
