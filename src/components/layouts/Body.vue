@@ -10,19 +10,18 @@ import { RouterLink, RouterView } from "vue-router";
         class="layout-menu menu-vertical menu bg-menu-theme"
         v-if="$route.name != 'coursesclass'"
       >
-        <div class="app-brand">
-          <a href="index.html" class="app-brand-link">
-            <span class="app-brand-logo">
-              <img
-                src="../../assets/ts-logo.png"
-                alt="the-skills logo"
-                style="width: 75px"
-              />
-            </span>
-            <!-- <span class="app-brand-text demo menu-text fw-bolder ms-2"
-              >THE-SKILLS.ID</span
-            > -->
-          </a>
+        <div class="text-center">
+          <span>
+            <img
+              src="../../assets/ts-logo.png"
+              alt="the-skills logo"
+              style="width: 75px"
+            />
+          </span>
+          <!-- <span class="app-brand-text demo menu-text fw-bolder ms-2"
+            >THE-SKILLS.ID</span
+          > -->
+
 
           <a
             href="javascript:void(0);"
@@ -39,7 +38,7 @@ import { RouterLink, RouterView } from "vue-router";
           <li
             v-for="(feature, index) in features"
             :key="index"
-            :class="`menu-item ${'/'+$route.name === feature.slug ? 'active' : ''}`"
+            :class="`menu-item ${'/'+$route.name === feature.slug || ($route.name === 'dashboard' && feature.slug === '/') ? 'active' : ''}`"
           >
             <router-link :to="feature.slug" class="menu-link">
               <i :class="`menu-icon tf-icons bx ${feature.icon}`"></i>
@@ -170,6 +169,7 @@ import { RouterLink, RouterView } from "vue-router";
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
+      
           <RouterView />
           <!-- / Content -->
 
