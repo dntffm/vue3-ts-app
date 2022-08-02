@@ -9,7 +9,6 @@ let menu, animate;
 (function () {
   // Initialize menu
   //-----------------
-
   let layoutMenuEl = document.querySelectorAll('#layout-menu');
   layoutMenuEl.forEach(function (element) {
     menu = new Menu(element, {
@@ -23,6 +22,7 @@ let menu, animate;
 
   // Initialize menu togglers and bind click on each
   let menuToggler = document.querySelectorAll('.layout-menu-toggle');
+
   menuToggler.forEach(item => {
     item.addEventListener('click', event => {
       event.preventDefault();
@@ -114,5 +114,5 @@ let menu, animate;
   // If current layout is vertical and current window screen is > small
 
   // Auto update menu collapsed/expanded based on the themeConfig
-  window.Helpers.setCollapsed(true, false);
+  //window.Helpers.setCollapsed(true, false);
 })();

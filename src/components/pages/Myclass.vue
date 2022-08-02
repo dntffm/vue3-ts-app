@@ -1,3 +1,12 @@
+<style>
+.imaged-header{
+    background-image: url('@/assets/img/undraw_fatherhood_-7-i19.svg');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 200px;
+    height: 100%;
+}
+</style>
 <template>
     <div class="content-wrapper">
         <!-- Content -->
@@ -10,9 +19,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <h5 class="card-header">All Courses</h5>
+                        <div class="card-header imaged-header">
+                            <h5>Courses Taken</h5>
+                            <p>Continue learning, keep fighting</p>
+                        </div>
                         <div class="card-body">
-                            <p>Explore your passion by join to our courses</p>
                             <div class="row mb-2" v-for="i in 3" :key="i">
                                 <div class="col-md">
                                     <div class="card mb-3">
@@ -27,7 +38,7 @@
                                                     <p class="card-text">Category</p>
                                                     <div class="d-flex justify-content-between">
                                                         <h5 class="card-title fw-bold">
-                                                            How to make someone want to love you
+                                                            How to make someone love you
                                                         </h5>
                                                     </div>
                                                     <div class="progress">

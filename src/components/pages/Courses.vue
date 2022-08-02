@@ -1,3 +1,13 @@
+<style>
+.imaged-header{
+    background-image: url('@/assets/img/undraw_startled_-8-p0r.svg');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 200px;
+    height: 100%;
+}
+</style>
+
 <template>
     <div class="content-wrapper">
         <!-- Content -->
@@ -39,9 +49,11 @@
                     <div class="row">
                         <div class="col-md-6 col-12 mb-md-0 mb-4">
                             <div class="card">
-                                <h5 class="card-header">All Courses</h5>
-                                <div class="card-body">
+                                <div class="card-header imaged-header">
+                                    <h5>All Courses</h5>
                                     <p>Explore your passion by join to our courses</p>
+                                </div>
+                                <div class="card-body">
                                     <div class="row mb-2" v-for="i in 3" :key="i">
                                         <div class="col-md">
                                             <div class="card mb-3">
@@ -56,7 +68,7 @@
                                                             <p class="card-text">Category</p>
                                                             <div class="d-flex justify-content-between">
                                                                 <h5 class="card-title fw-bold">
-                                                                    How to make someone want to love you
+                                                                    How to make someone love you
                                                                 </h5>
                                                                 <h5 class="fw-bold">Rp. 1000</h5>
                                                             </div>

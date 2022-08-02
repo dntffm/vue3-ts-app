@@ -28,7 +28,6 @@ export default {
 
     if (filePath === "login" || filePath === "register")
       this.isNotUseBody = true;
-    console.log(filePath);
   },
 };
 </script>

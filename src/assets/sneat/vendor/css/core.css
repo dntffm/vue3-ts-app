@@ -15005,6 +15005,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .menu-link {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   flex: 0 1 auto;
   margin: 0;
@@ -15073,7 +15074,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .menu-vertical .menu-block,
 .menu-vertical .menu-inner > .menu-item,
 .menu-vertical .menu-inner > .menu-header {
-  width: 16.25rem;
+  width: 6.25rem;
 }
 .menu-vertical .menu-inner {
   flex-direction: column;

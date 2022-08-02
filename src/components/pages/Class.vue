@@ -1,77 +1,59 @@
 <template>
     <div class="content-wrapper">
         <!-- Content -->
-
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">/</span> My Class
-            </h4>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <h5 class="card-header">All Courses</h5>
-                        <div class="card-body">
-                            <p>Explore your passion by join to our courses</p>
-                            <div class="row mb-2" v-for="i in 3" :key="i">
-                                <div class="col-md">
-                                    <div class="card mb-3">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img class="card-img card-img-left"
-                                                    src="https://dummyimage.com/600x400/000/fff"
-                                                    alt="Card image" />
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <p class="card-text">Category</p>
-                                                    <div class="d-flex justify-content-between">
-                                                        <h5 class="card-title fw-bold">
-                                                            How to make someone want to love you
-                                                        </h5>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                            25%
-                                                        </div>
-                                                    </div>
-                                                    <a href="javascript:void(0)" class="btn btn-sm btn-primary rounded-pill mt-4">Continue Learning</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item prev">
-                                    <a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevrons-left"></i></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">2</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0);">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">5</a>
-                                </li>
-                                <li class="page-item next">
-                                    <a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevrons-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+            <button class="btn btn-primary more-content-btn m-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasStart"
+              aria-controls="offcanvasStart">
+              <i class="bx bx-right-arrow"></i>
+            </button>
+            <div class="d-flex justify-content-between align-items-center">
+              <h4 class="fw-bold py-3 my-4">
+                <span class="text-muted fw-light">/</span> Materi 1 : Mengenal Sebelah Mata
+              </h4>
+              <router-link to="/myclass">Back to Home</router-link>
             </div>
+            <div class="d-flex justify-content-between mb-3">
+              <button class="btn btn-light" type="button">
+                Previous: Judulnya
+              </button>
+              <button class="btn btn-light" type="button">
+                Next: Judulnya
+              </button>
+            </div>
+            <div class="m-auto">
+              <iframe width="100%" height="380"
+              src="https://www.youtube.com/embed/tgbNymZ7vqY">
+              </iframe> 
+            </div>
+        </div>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasStart"
+          aria-labelledby="offcanvasStartLabel" style="visibility: visible;" aria-modal="true" role="dialog">
+          <div class="offcanvas-header">
+            <h5 id="offcanvasStartLabel" class="offcanvas-title">List of Contents</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body mx-0">
+            <div class="list-group">
+              <a href="javascript:void(0);"
+                class="flex-column align-items-start border-bottom mb-2" v-for="i in 20" :key="i">
+                <div class="d-flex justify-content-between w-100">
+                  <h6>Mengenal Sebelah Mata </h6>
+                  <i class="bx bx-play-circle"></i>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
     </div>
 </template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      
+    }
+  },
+}
+</script>
