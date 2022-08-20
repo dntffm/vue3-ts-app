@@ -4,3 +4,10 @@
   border-radius: 0 !important;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.card-hover:hover {
+  border: 1px solid #696cff;
+}

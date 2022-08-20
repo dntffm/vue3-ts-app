@@ -56,7 +56,7 @@
                                 <div class="card-body">
                                     <div class="row mb-2" v-for="i in 3" :key="i">
                                         <div class="col-md">
-                                            <div class="card mb-3">
+                                            <div class="card mb-3 cursor-pointer card-hover">
                                                 <div class="row g-0">
                                                     <div class="col-md-4">
                                                         <img class="card-img card-img-left"

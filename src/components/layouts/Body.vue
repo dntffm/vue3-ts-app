@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from "vue-router";
       <aside
         id="layout-menu"
         class="layout-menu menu-vertical menu bg-menu-theme"
-        v-if="$route.name != 'coursesclass'"
+        v-if="$route.name != 'subClass'"
       >
         <div class="text-center">
           <span>
@@ -56,7 +56,7 @@ import { RouterLink, RouterView } from "vue-router";
         <nav
           class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar"
-          v-if="$route.name != 'coursesclass'"
+          v-if="$route.name != 'subClass'"
         >
           <div
             class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"

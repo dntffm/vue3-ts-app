@@ -46,7 +46,7 @@
                                                             25%
                                                         </div>
                                                     </div>
-                                                    <router-link to="/courses/class/1">
+                                                    <router-link to="/class/1">
                                                         <button role="button" class="btn btn-sm btn-primary rounded-pill mt-4">Continue Learning</button>
                                                     </router-link>
                                                 </div>
