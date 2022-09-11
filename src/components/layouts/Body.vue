@@ -1,6 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
 <template>
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
@@ -8,9 +5,9 @@ import { RouterLink, RouterView } from "vue-router";
       <aside
         id="layout-menu"
         class="layout-menu menu-vertical menu bg-menu-theme"
-        v-if="$route.name != 'subClass'"
+        v-if="$route.name != 'subClass' && role === '1'"
       >
-        <div class="text-center">
+        <div>
           <span>
             <img
               src="../../assets/ts-logo.png"
@@ -18,11 +15,89 @@ import { RouterLink, RouterView } from "vue-router";
               style="width: 75px"
             />
           </span>
-          <!-- <span class="app-brand-text demo menu-text fw-bolder ms-2"
+          <span class="app-brand-text demo menu-text fw-bolder ms-2"
             >THE-SKILLS.ID</span
-          > -->
+          >
+          <a
+            href="javascript:void(0);"
+            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
+          >
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </a>
+        </div>
 
+        <div class="menu-inner-shadow"></div>
 
+        <ul class="menu-inner py-1">
+          <!-- Dashboard -->
+          <li class="menu-item">
+            <router-link to="/" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </router-link>
+          </li>
+          <!-- Course -->
+          <li class="menu-item open">
+            <router-link to="/courses" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-book"></i>
+              <div data-i18n="Analytics">Courses</div>
+            </router-link>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                  <router-link to="/courses/list" class="menu-link">
+                    <div data-i18n="List view">List view</div>
+                  </router-link>
+                </li>
+              </ul>
+          </li>
+          <!-- Article -->
+          <li class="menu-item open">
+            <router-link to="/articles" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-book"></i>
+              <div data-i18n="Analytics">Articles</div>
+            </router-link>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                  <a class="menu-link">
+                    <div data-i18n="List view">List view</div>
+                  </a>
+                </li>
+              </ul>
+          </li>
+          <!-- Webinars -->
+          <li class="menu-item open">
+            <router-link to="/webinars" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-book"></i>
+              <div data-i18n="Analytics">Webinars</div>
+            </router-link>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                  <a class="menu-link">
+                    <div data-i18n="List view">List view</div>
+                  </a>
+                </li>
+              </ul>
+          </li>
+        </ul>
+      </aside>
+      
+      <!-- Not admin menu -->
+      <aside
+        id="layout-menu"
+        class="layout-menu menu-vertical menu bg-menu-theme"
+        v-if="$route.name != 'subClass' && role != '1'"
+      >
+        <div>
+          <span>
+            <img
+              src="../../assets/ts-logo.png"
+              alt="the-skills logo"
+              style="width: 75px"
+            />
+          </span>
+          <span class="app-brand-text demo menu-text fw-bolder ms-2"
+            >THE-SKILLS.ID</span
+          >
           <a
             href="javascript:void(0);"
             class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
@@ -42,11 +117,13 @@ import { RouterLink, RouterView } from "vue-router";
           >
             <router-link :to="feature.slug" class="menu-link">
               <i :class="`menu-icon tf-icons bx ${feature.icon}`"></i>
-              <!-- <div data-i18n="Analytics">{{feature.name}}</div> -->
+              <div data-i18n="Analytics">{{feature.name}}</div>
             </router-link>
           </li>
         </ul>
       </aside>
+      <!-- END -->
+      
       <!-- / Menu -->
 
       <!-- Layout container -->
@@ -190,24 +267,25 @@ import { RouterLink, RouterView } from "vue-router";
 </template>
 
 <script>
+import { onMounted, ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      features: [
+  setup() {
+    let features = ref([
         {
           name: "Dashboard",
           slug: "/",
-          icon: "bx-home-circle"
+          icon: "bx-home-circle",
         },
         {
           name: "My Class",
           slug: "/myclass",
-          icon: "bx-notepad"
+          icon: "bx-notepad",
         },
         {
           name: "Courses",
           slug: "/courses",
-          icon: "bx-book"
+          icon: "bx-book",
         },
         {
           name: "Agendas",
@@ -224,19 +302,25 @@ export default {
           slug: "/webinars",
           icon: "bx-webcam"
         },
-      ],
-    };
-  },
-  mounted(){
-    // Initialize menu togglers and bind click on each
-    let menuToggler = document.querySelectorAll('.layout-menu-toggle');
+    ]);
 
-    menuToggler.forEach(item => {
-      item.addEventListener('click', event => {
-        event.preventDefault();
-        window.Helpers.toggleCollapsed();
+    let role = ref(JSON.parse(localStorage.getItem("user")).role)
+    onMounted(() => {
+      // Initialize menu togglers and bind click on each
+      let menuToggler = document.querySelectorAll('.layout-menu-toggle');
+
+      menuToggler.forEach(item => {
+        item.addEventListener('click', event => {
+          event.preventDefault();
+          window.Helpers.toggleCollapsed();
+        });
       });
     });
+
+    return {
+      features,
+      role
+    }
   }
-};
+}
 </script>

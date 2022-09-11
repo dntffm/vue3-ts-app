@@ -50,7 +50,11 @@
 </template>
 
 <script>
-export default {
+  import { watchEffect } from '@vue/runtime-core'
   
-};
+  export default {
+    setup() {
+      watchEffect
+    }
+  }
 </script>

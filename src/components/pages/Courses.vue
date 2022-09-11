@@ -6,6 +6,11 @@
     background-size: 200px;
     height: 100%;
 }
+
+.card-course:hover {
+    transform: translateY(-1px);
+    background-color: rgb(255, 255, 255);
+}
 </style>
 
 <template>
@@ -54,23 +59,27 @@
                                     <p>Explore your passion by join to our courses</p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row mb-2" v-for="i in 3" :key="i">
+                                    <div class="no-data text-center mt-5" v-if="courses.length === 0">
+                                        <img src="@/assets/img/undraw_dog_re_fijp.svg" alt="confused dog">
+                                        <p>I think there is no data..</p>
+                                    </div>
+                                    <div class="row mb-2" v-for="(c,i) in courses" :key="i" v-else>
                                         <div class="col-md">
-                                            <div class="card mb-3 cursor-pointer card-hover">
+                                            <div class="card mb-3 cursor-pointer card-course">
                                                 <div class="row g-0">
                                                     <div class="col-md-4">
                                                         <img class="card-img card-img-left"
-                                                            src="https://dummyimage.com/600x400/000/fff"
+                                                            :src="c.image.url"
                                                             alt="Card image" />
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="card-body">
-                                                            <p class="card-text">Category</p>
+                                                            <p class="card-text">{{c.category.course_category_name}}</p>
                                                             <div class="d-flex justify-content-between">
                                                                 <h5 class="card-title fw-bold">
-                                                                    How to make someone love you
+                                                                    {{c.course_name}}
                                                                 </h5>
-                                                                <h5 class="fw-bold">Rp. 1000</h5>
+                                                                <h5 class="fw-bold">Rp. {{c.price}}</h5>
                                                             </div>
                                                             <div class="d-flex align-items-center">
                                                                 <i class="bx bxs-heart me-2 text-danger"></i>
@@ -83,7 +92,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <nav aria-label="Page navigation">
+                                <!-- <nav aria-label="Page navigation">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item prev">
                                             <a class="page-link" href="javascript:void(0);"><i
@@ -109,24 +118,24 @@
                                                     class="tf-icon bx bx-chevrons-right"></i></a>
                                         </li>
                                     </ul>
-                                </nav>
+                                </nav> -->
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" v-if="courseOnDetail != null">
                                     <div class="card border-light h-100">
-                                        <img class="card-img-top" src="https://dummyimage.com/600x400/000/fff"
+                                        <img class="card-img-top" :src="courseOnDetail.image.url"
                                             alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
+                                            <h5 class="card-title">{{courseOnDetail.course_name}}</h5>
                                             <p class="card-text">
-                                                Some quick example text to build on the card title and make up the bulk
-                                                of the card's content.
+                                                {{courseOnDetail.description}}
                                             </p>
-                                            <p>Category: <span class="fw-bold">Art</span></p>
+                                            <p>Category: <span class="fw-bold">{{courseOnDetail.category.course_category_name}}</span></p>
                                             <p>Level: <span class="fw-bold">III</span></p>
-                                            <a href="javascript:void(0)" class="btn btn-primary rounded-pill">Join Course</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary rounded-pill">Join
+                                                Course</a>
                                         </div>
                                     </div>
                                 </div>
@@ -138,3 +147,38 @@
         </div>
     </div>
 </template>
+
+<script>
+    import { ref, onMounted } from '@vue/runtime-core'
+import axios from 'axios';
+    export default {
+        setup() {
+            let courses = ref([]);
+            let courseOnDetail = ref(null);
+
+            onMounted(() => {
+                const apiUrl =
+                    import.meta.env.VITE_API_URL;
+                axios.get(`${apiUrl}/courses`, {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        }
+                    })
+                    .then(res => {
+                        courses.value = res.data.data;
+                        if(res.data.data.length > 0) {
+                            courseOnDetail.value = res.data.data[0];
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            });
+
+            return {
+                courses,
+                courseOnDetail
+            }
+        }
+    }
+</script>

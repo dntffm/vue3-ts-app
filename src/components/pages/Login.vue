@@ -64,13 +64,19 @@
                     </svg>
                   </span>
                   <span class="app-brand-text demo text-body fw-bolder">Sneat</span>
+                  
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Sneat! ðŸ‘‹</h4>
+              <h4 class="mb-2">Welcome to The-skill!</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <div class="alert alert-danger alert-dismissible" role="alert" v-if="validationError.length > 0">
+                <ul class="list-unstyled">
+                  <li v-for="(msg,i) in validationError" :key="i">{{msg}}</li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <form id="formAuthentication" class="mb-3" @submit.prevent="onSubmit">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
                   <input
@@ -80,6 +86,9 @@
                     name="email-username"
                     placeholder="Enter your email or username"
                     autofocus
+                    required
+                    autocomplete="off"
+                    v-model="authData.email"
                   />
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -97,8 +106,10 @@
                       name="password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
+                      required
+                      v-model="authData.password"
                     />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide" id="hide-show-pw" @click="togglePassword"></i></span>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -108,15 +119,24 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit" :disabled="loading">
+                    <span v-if="!loading">
+                      Sign in
+                    </span>
+                    <div class="spinner-border spinner-border-sm text-light m-auto" role="status" v-if="loading">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </button>
                 </div>
               </form>
 
               <p class="text-center">
                 <span>New on our platform?</span>
-                <a href="auth-register-basic.html">
-                  <span>Create an account</span>
-                </a>
+                <router-link to="/register">
+                  <a>
+                    <span>Create an account</span>
+                  </a>
+                </router-link>
               </p>
             </div>
           </div>
@@ -125,3 +145,69 @@
       </div>
     </div>
 </template>
+
+<script>
+  import { reactive, ref } from 'vue';
+  import axios from 'axios';
+
+  export default {
+    setup(){
+      let loading = ref(false);
+      let authData = reactive({
+        email: '',
+        password: ''
+      });
+
+      let validationError = ref([])
+
+      function onSubmit(){
+        const apiUrl = import.meta.env.VITE_API_URL;
+        
+        loading.value = true;
+        
+        axios.post(`${apiUrl}/login`, {
+          email: authData.email,
+          password: authData.password
+        }).then((r) => {
+          loading.value = false
+          localStorage.setItem('token', r.data.data.token);
+          localStorage.setItem('user', JSON.stringify(r.data.data.user));
+          window.location.href = '/';
+        }).catch(error => {
+          let message = error.response.data.message
+          let validationTemp = []
+
+          if(typeof(message) != "string") {
+            for(let key in message) {
+              validationTemp.push(message[key][0])
+            }
+          } else {
+            validationTemp.push(message)
+          }
+
+
+          validationError.value = validationTemp
+          loading.value = false
+        });
+      }
+
+      function togglePassword(e) {
+        let password = document.getElementById('password');
+
+        if (password.type === 'password') {
+          password.type = 'text';
+        } else {
+          password.type = 'password';
+        }
+      }
+
+      return {
+        authData,
+        onSubmit,
+        loading,
+        togglePassword,
+        validationError
+      }
+    },
+  };
+</script>

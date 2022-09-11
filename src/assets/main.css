@@ -11,3 +11,7 @@
 .card-hover:hover {
   border: 1px solid #696cff;
 }
+
+.no-data img{
+  width: 250px;
+}
